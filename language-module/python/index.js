@@ -3,6 +3,16 @@
 module.exports = (()=> {
     let lang_module = {};
 
+    const escape = (str)=> str
+        .replace(/[\\]/g, '\\\\')
+        .replace(/[\"]/g, '\\\"')
+        .replace(/[\/]/g, '\\/')
+        .replace(/[\b]/g, '\\b')
+        .replace(/[\f]/g, '\\f')
+        .replace(/[\n]/g, '\\n')
+        .replace(/[\r]/g, '\\r')
+        .replace(/[\t]/g, '\\t');
+
     const path = require('path');
     const fs = require('fs');
 
@@ -48,7 +58,7 @@ module.exports = (()=> {
         }
 
         let result = fs.readFileSync(path.resolve(__dirname, 'script', 'create.js'), 'utf-8');
-        result = result.replace('__script__', script);
+        result = result.replace('__script__', escape(script));
         result = result.replace('__target__', target);
         return result;
     };
