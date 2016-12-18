@@ -60,7 +60,7 @@ for key in __vars__.keys():
         elif type(__vars__[key]).__name__ == 'dict':
             __save__[key] = __vars__[key]
     except:
-        print
+        None
 
 try:
     __save__ = json.dumps(__save__)
@@ -68,7 +68,7 @@ try:
     file_.write(__save__)
     file_.close()
 except:
-    print
+    None
 `;
 
 pythonScript += '\n';

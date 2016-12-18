@@ -27,12 +27,15 @@ module.exports = (()=> {
         let scripts = path.resolve(project_path, 'scripts.json');
         scripts = JSON.parse(fs.readFileSync(scripts, 'utf-8'));
 
+        let adding = '';
+
         for (let j = 0; j < target; j++) {
             if (scripts[j].type == 'python') {
                 let addingScript = scripts[j].value + '';
                 addingScript = addingScript.split('\n');
                 let addingScriptTmp = '';
                 let fnStart = false;
+
                 for (let k = 0; k < addingScript.length; k++) {
                     if (fnStart === true) {
                         if (addingScript[k].indexOf('\t') === 0 || addingScript[k].indexOf('  ') === 0) {
@@ -53,9 +56,11 @@ module.exports = (()=> {
                     }
                 }
 
-                script = addingScriptTmp + '\n' + script;
+                adding = adding + '\n' + addingScriptTmp;
             }
         }
+
+        script = adding + '\n' + script;
 
         let result = fs.readFileSync(path.resolve(__dirname, 'script', 'create.js'), 'utf-8');
         result = result.replace('__script__', escape(script));

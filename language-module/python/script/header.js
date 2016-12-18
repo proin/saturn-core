@@ -15,7 +15,7 @@ saturn.python = (python_path)=> new Promise((resolve)=> {
     });
 
     term.stdout.on('data', (data)=> {
-        console.log(data + '');
+        // console.log(data + '');
     });
 
     term.stderr.on('data', (data)=> {
