@@ -1,0 +1,9 @@
+.DS_Store
+dump.rdb
+npm-debug.log
+.idea/
+.git/
+node_modules/
+plugins/
+test/
+test.js

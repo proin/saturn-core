@@ -1,0 +1,30 @@
+{
+  "name": "saturn-core",
+  "version": "0.1.0",
+  "description": "saturn core",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/proin/saturn-core.git"
+  },
+  "keywords": [
+    "saturn",
+    "ide",
+    "python",
+    "node",
+    "machine-learning"
+  ],
+  "author": "proin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/proin/saturn-core/issues"
+  },
+  "homepage": "https://github.com/proin/saturn-core#readme",
+  "dependencies": {
+    "fs-extra": "^1.0.0",
+    "js-beautify": "^1.6.4"
+  }
+}
