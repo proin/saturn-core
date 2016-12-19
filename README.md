@@ -87,13 +87,20 @@ console.log(runnable);
     - this function stop if project running
 - `connect.disconnect`: Promise
     - this function remove connection (signout from server)
+- `connect.log`: Function (project_path)
 
 ```js
 let saturn = require('saturn-core');
 let connect = saturn.connect('http://host', 'user', 'password');
 
+let log = connect.log('/examples/server/express-api-server.satbook')
+    .on('data', (json_data)=> {
+        // when log received. 
+    });
+log.close(); // force stop log
+
 // stop and run project
-con.stop('/examples/server/express-api-server.satbook')
-    .then(()=> con.run('/examples/server/express-api-server.satbook', 'all'))
-    .then(()=> con.disconnect());
+connect.stop('/examples/server/express-api-server.satbook')
+    .then(()=> connect.run('/examples/server/express-api-server.satbook', 'all'))
+    .then(()=> connect.disconnect());
 ```
