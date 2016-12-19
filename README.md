@@ -58,7 +58,7 @@ console.log(runnable);
 
 #### worker
 
-- `worker.run`: Promise (project_path, target, binder)
+- `worker.run`: Promise (project_path, target, binder, argv)
     - `project_path`: project path in your file system
     - `target`: 'all' or '1', '2', .., 'n'
     - `binder`:
