@@ -83,6 +83,8 @@ console.log(runnable);
         - **this function overwrite the project**
         - `lib`: lib.json in your project
         - `scripts`: scripts.json in your project
+- `connect.status`: Promise
+    - return running process
 - `connect.stop`: Promise (project_path)
     - this function stop if project running
 - `connect.disconnect`: Promise
