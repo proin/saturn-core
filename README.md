@@ -2,11 +2,30 @@
 
 ### Install
 
+cli
+
+```
+npm install -g saturn-core
+```
+
+use in code
+
 ```
 npm install --save saturn-core
 ```
 
 ### Usage
+
+#### Cli
+
+```
+saturn clean ~/your/saturn/path     # clean project (include config, run.js, variables) 
+saturn install ~/your/saturn/path   # install npm
+saturn run ~/your/saturn/path       # run project
+saturn run ~/your/saturn/path 2     # run specific block [0-n]
+```
+
+#### in Code
 
 ```js
 'use strict';
@@ -34,8 +53,3 @@ let runnable = compiler.runnable(satbook);
 
 console.log(runnable);
 ```
-
-### Updating Plan
-
-- thread management
-- simple api server daemon (for distributing easily)
