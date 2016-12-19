@@ -5,6 +5,7 @@ module.exports = (()=> {
 
     saturn.compile = require('./lib/compile');
     saturn.worker = require('./lib/worker');
+    saturn.connect = require('./lib/connect');
 
     return saturn;
 })();
