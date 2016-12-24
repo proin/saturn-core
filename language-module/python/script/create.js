@@ -12,10 +12,10 @@ for (let key in global) {
 variables = JSON.parse(JSON.stringify(variables));
 delete variables.console;
 
-pythonScript += 'import json';
-pythonScript += 'import os';
-pythonScript += 'import sys';
-pythonScript += 'sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))';
+pythonScript += 'import json\n';
+pythonScript += 'import os\n';
+pythonScript += 'import sys\n';
+pythonScript += 'sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))\n';
 pythonScript += '\n';
 
 for (let key in variables) {
