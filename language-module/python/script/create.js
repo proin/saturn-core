@@ -13,6 +13,9 @@ variables = JSON.parse(JSON.stringify(variables));
 delete variables.console;
 
 pythonScript += 'import json';
+pythonScript += 'import os';
+pythonScript += 'import sys';
+pythonScript += 'sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))';
 pythonScript += '\n';
 
 for (let key in variables) {
