@@ -50,6 +50,10 @@ module.exports = (()=> {
                         addingScriptTmp += addingScript[k] + '\n';
                     }
 
+                    if (addingScript[k].indexOf('sys') === 0) {
+                        addingScriptTmp += addingScript[k] + '\n';
+                    }
+
                     if (addingScript[k].indexOf('def') === 0) {
                         fnStart = true;
                         addingScriptTmp += addingScript[k] + '\n';
