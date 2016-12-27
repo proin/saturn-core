@@ -8,6 +8,7 @@ module.exports = (()=> {
         result += script;
         result += '\n};';
         result += '\n__async__main__();\n';
+        result += '\nresolve();\n';
         return result;
     };
 
