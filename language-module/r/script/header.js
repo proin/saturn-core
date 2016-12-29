@@ -20,10 +20,10 @@ saturn.R = (r_path)=> new Promise((resolve)=> {
 
     term.stderr.on('data', (data)=> {
         process.stderr.write(data);
-        throw new Error('RScript Error');
     });
 
-    term.on('close', () => {
+    term.on('close', (code) => {
+        if(code !== 0) throw new Error('RScript Error');
         let varJSON = require('path').resolve(require('path').dirname(__filename), 'variable.json');
         if (require('fs').existsSync(varJSON)) {
             let v = JSON.parse(require('fs').readFileSync(varJSON, 'utf-8'));
