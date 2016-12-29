@@ -67,8 +67,11 @@ module.exports = (()=> {
         script = adding + '\n' + script;
 
         let result = fs.readFileSync(path.resolve(__dirname, 'script', 'create.js'), 'utf-8');
-        result = result.replace('__script__', escape(script));
-        result = result.replace('__target__', target);
+        result = result.replace('__HEADER__', escape(fs.readFileSync(`${__dirname}/script/header.py`, 'utf-8')));
+        result = result.replace('__FOOTER__', escape(fs.readFileSync(`${__dirname}/script/footer.py`, 'utf-8')));
+        result = result.replace('__SCRIPT__', escape(script));
+        result = result.replace('__TARGET__', target);
+
         return result;
     };
 

@@ -1,4 +1,4 @@
-saturn.python = (python_path)=> new Promise((resolve)=> {
+saturn.R = (r_path)=> new Promise((resolve)=> {
     let _spawn = require('child_process').spawn;
     if (process.platform == 'win32')
         _spawn = require('cross-spawn');
@@ -6,9 +6,9 @@ saturn.python = (python_path)=> new Promise((resolve)=> {
     let config = require('path').resolve(require('path').dirname(__filename), 'config.json');
     if (require('fs').existsSync(config)) config = JSON.parse(require('fs').readFileSync(config, 'utf-8'));
     else config = {};
-    if (config.python) config.python = config.python.replace('~', process.env.HOME || process.env.USERPROFILE);
+    if (config.R) config.R = config.R.replace('~', process.env.HOME || process.env.USERPROFILE);
 
-    let term = _spawn(config.python ? config.python : 'python', ['-u', python_path], {cwd: process.cwd()});
+    let term = _spawn(config.R ? config.R : 'Rscript', [r_path], {cwd: process.cwd()});
 
     process.on('SIGINT', () => {
         term.kill();
@@ -20,7 +20,7 @@ saturn.python = (python_path)=> new Promise((resolve)=> {
 
     term.stderr.on('data', (data)=> {
         process.stderr.write(data);
-        throw new Error('Python Error');
+        throw new Error('RScript Error');
     });
 
     term.on('close', () => {

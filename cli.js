@@ -28,10 +28,10 @@ if (commands[0] == 'clean') {
         PROJECT_PATH = path.resolve(PROJECT_PATH);
         worker.run(PROJECT_PATH, TARGET, {
             data: (data)=> {
-                console.log(data + '');
+                process.stdout.write(data);
             },
             error: (data)=> {
-                console.log(data + '');
+                process.stderr.write(data);
             }
         }).then(()=> {
         });
@@ -44,10 +44,10 @@ if (commands[0] == 'clean') {
         PROJECT_PATH = path.resolve(PROJECT_PATH);
         worker.install(PROJECT_PATH, {
             data: (data)=> {
-                console.log(data + '');
+                process.stdout.write(data);
             },
             error: (data)=> {
-                console.log(data + '');
+                process.stderr.write(data);
             }
         }).then(()=> {
         });

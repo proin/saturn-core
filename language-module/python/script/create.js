@@ -1,4 +1,4 @@
-let pythonScript = '# -*- coding: utf-8 -*-\n';
+let pythonScript = '';
 
 let variables = {};
 for (let key in global) {
@@ -12,10 +12,7 @@ for (let key in global) {
 variables = JSON.parse(JSON.stringify(variables));
 delete variables.console;
 
-pythonScript += 'import json\n';
-pythonScript += 'import os\n';
-pythonScript += 'import sys\n';
-pythonScript += 'sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))\n';
+pythonScript += '__HEADER__';
 pythonScript += '\n';
 
 for (let key in variables) {
@@ -36,47 +33,11 @@ for (let key in variables) {
     }
 }
 
-pythonScript += `__script__`;
-
+pythonScript += `__SCRIPT__`;
 pythonScript += '\n';
+pythonScript += `__FOOTER__`;
 
-pythonScript += `
-__save__ = {}
-__vars__ = vars().copy();
-
-for key in __vars__.keys():
-    if key == '__save__':
-        continue;
-    if key == '__vars__':
-        continue;
-    try:
-        if type(__vars__[key]).__name__ == 'list':
-            __save__[key] = __vars__[key]
-        elif type(__vars__[key]).__name__ == 'str':
-            __save__[key] = __vars__[key]
-        elif type(__vars__[key]).__name__ == 'int':
-            __save__[key] = __vars__[key]
-        elif type(__vars__[key]).__name__ == 'long':
-            __save__[key] = __vars__[key]
-        elif type(__vars__[key]).__name__ == 'float':
-            __save__[key] = __vars__[key]
-        elif type(__vars__[key]).__name__ == 'dict':
-            __save__[key] = __vars__[key]
-    except:
-        None
-
-try:
-    __save__ = json.dumps(__save__)
-    file_ = open('${require('path').join(require('path').dirname(__filename), 'variable.json')}', 'w')
-    file_.write(__save__)
-    file_.close()
-except:
-    None
-`;
-
-pythonScript += '\n';
-
-let py = require('path').resolve(require('path').dirname(__filename), 'python-__target__.py');
+let py = require('path').resolve(require('path').dirname(__filename), 'python-__TARGET__.py');
 fs.writeFileSync(py, pythonScript);
 
 saturn.python(py).then(resolve);
