@@ -8,7 +8,8 @@ saturn.R = (r_path)=> new Promise((resolve)=> {
     else config = {};
     if (config.R) config.R = config.R.replace('~', process.env.HOME || process.env.USERPROFILE);
 
-    let term = _spawn(config.R ? config.R : 'Rscript', [r_path], {cwd: process.cwd()});
+    let _argv = [r_path].concat(process.argv);
+    let term = _spawn(config.R ? config.R : 'Rscript', _argv, {cwd: process.cwd()});
 
     process.on('SIGINT', () => {
         term.kill();
@@ -23,7 +24,7 @@ saturn.R = (r_path)=> new Promise((resolve)=> {
     });
 
     term.on('close', (code) => {
-        if(code !== 0) throw new Error('RScript Error');
+        if (code !== 0) throw new Error('RScript Error');
         let varJSON = require('path').resolve(require('path').dirname(__filename), 'variable.json');
         if (require('fs').existsSync(varJSON)) {
             let v = JSON.parse(require('fs').readFileSync(varJSON, 'utf-8'));

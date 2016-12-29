@@ -8,7 +8,9 @@ saturn.python = (python_path)=> new Promise((resolve)=> {
     else config = {};
     if (config.python) config.python = config.python.replace('~', process.env.HOME || process.env.USERPROFILE);
 
-    let term = _spawn(config.python ? config.python : 'python', ['-u', python_path], {cwd: process.cwd()});
+    let _argv = ['-u', python_path].concat(process.argv);
+
+    let term = _spawn(config.python ? config.python : 'python', _argv, {cwd: process.cwd()});
 
     process.on('SIGINT', () => {
         term.kill();
@@ -23,7 +25,7 @@ saturn.python = (python_path)=> new Promise((resolve)=> {
     });
 
     term.on('close', (code) => {
-        if(code !== 0) throw new Error('Python Error');
+        if (code !== 0) throw new Error('Python Error');
         let varJSON = require('path').resolve(require('path').dirname(__filename), 'variable.json');
         if (require('fs').existsSync(varJSON)) {
             let v = JSON.parse(require('fs').readFileSync(varJSON, 'utf-8'));

@@ -21,8 +21,12 @@ if (commands[0] == 'clean') {
 } else if (commands[0] == 'run') {
     let PROJECT_PATH = commands[1];
 
+    let sliceIndex = 3;
     let TARGET = commands[2];
-    if (!TARGET) TARGET = 'lib';
+    if (!TARGET) {
+        sliceIndex = 2;
+        TARGET = 'lib';
+    }
 
     if (PROJECT_PATH) {
         PROJECT_PATH = path.resolve(PROJECT_PATH);
@@ -33,7 +37,7 @@ if (commands[0] == 'clean') {
             error: (data)=> {
                 process.stderr.write(data);
             }
-        }).then(()=> {
+        }, commands.slice(sliceIndex)).then(()=> {
         });
     }
     else
