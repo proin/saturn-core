@@ -58,6 +58,11 @@ module.exports = (()=> {
                         fnStart = true;
                         addingScriptTmp += addingScript[k] + '\n';
                     }
+
+					if (addingScript[k].indexOf('class') === 0) {
+						fnStart = true;
+						addingScriptTmp += addingScript[k] + '\n';
+					}
                 }
 
                 adding = adding + '\n' + addingScriptTmp;
